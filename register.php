@@ -5,40 +5,41 @@ include('connect.php');
 
 session_start();
 
-if(isset($_SESSION['user_id'])){
-   $user_id = $_SESSION['user_id'];
-}else{
-   $user_id = '';
-};
+if (isset($_SESSION['user_id'])) {
+    $user_id = $_SESSION['user_id'];
+} else {
+    $user_id = '';
+}
+;
 
-if(isset($_POST['register'])){
+if (isset($_POST['register'])) {
 
-   $name = $_POST['name'];
-   $name = filter_var($name, FILTER_SANITIZE_STRING);
-   $email = $_POST['email'];
-   $email = filter_var($email, FILTER_SANITIZE_STRING);
-   $pass = sha1($_POST['pass']);
-   $pass = filter_var($pass, FILTER_SANITIZE_STRING);
-   $cpass = sha1($_POST['cpass']);
-   $cpass = filter_var($cpass, FILTER_SANITIZE_STRING);
+    $name = $_POST['name'];
+    $name = filter_var($name, FILTER_SANITIZE_STRING);
+    $email = $_POST['email'];
+    $email = filter_var($email, FILTER_SANITIZE_STRING);
+    $pass = sha1($_POST['pass']);
+    $pass = filter_var($pass, FILTER_SANITIZE_STRING);
+    $cpass = sha1($_POST['cpass']);
+    $cpass = filter_var($cpass, FILTER_SANITIZE_STRING);
 
-   $select_user = $conn->prepare("SELECT * FROM `users` WHERE email = ?");
-   $select_user->execute([$email,]);
-   $row = $select_user->fetch(PDO::FETCH_ASSOC);
+    $select_user = $conn->prepare("SELECT * FROM `users` WHERE email = ?");
+    $select_user->execute([$email,]);
+    $row = $select_user->fetch(PDO::FETCH_ASSOC);
 
-   if($select_user->rowCount() > 0){
-      echo 'email already exists!';
-   }else{
-      if($pass != $cpass){
-         echo 'confirm password not matched!';
-      }else{
-         $insert_user = $conn->prepare("INSERT INTO `users`(name, email, password) VALUES(?,?,?)");
-         $insert_user->execute([$name, $email, $cpass]);
-          echo 'registered successfully, login now please!';
-      }
-   }
+    if ($select_user->rowCount() > 0) {
+        echo 'email already exists!';
+    } else {
+        if ($pass != $cpass) {
+            echo 'confirm password not matched!';
+        } else {
+            $insert_user = $conn->prepare("INSERT INTO `users`(name, email, password) VALUES(?,?,?)");
+            $insert_user->execute([$name, $email, $cpass]);
+            echo 'registered successfully, login now please!';
+        }
+    }
 
-}   
+}
 
 ?>
 <!DOCTYPE html>
@@ -52,7 +53,7 @@ if(isset($_POST['register'])){
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
     <script src="https://kit.fontawesome.com/1ca3e04119.js" crossorigin="anonymous"></script>
-    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
 
 </head>
 
@@ -109,7 +110,7 @@ if(isset($_POST['register'])){
 
             <form action="" method="post">
                 <input type="text" name="name" placeholder="Name">
-                <input type="text" name="email" placeholder="Email" >
+                <input type="text" name="email" placeholder="Email">
                 <input type="text" name="pass" placeholder="Password">
                 <input type="text" name="cpass" placeholder=" Confirm Password" class="sec">
                 <input type="submit" name="register" value="Register">
@@ -117,14 +118,14 @@ if(isset($_POST['register'])){
             <p>Already an User <a href="login.php"> Login <i class="fa-solid fa-right-to-bracket"></i></a></p>
         </div>
     </div>
-    <div class="mobile-menu login-menu" id="menus" >
+    <div class="mobile-menu login-menu" id="menus">
         <div class="cut-btn" onclick="menuclose()">
             <i class="fa-solid fa-xmark"></i>
         </div>
-        <div class="mobile-menus" >
+        <div class="mobile-menus">
             <ul>
                 <a href="index.php">
-                    <li><i class="fa-solid fa-house"></i>  Home</li>
+                    <li><i class="fa-solid fa-house"></i> Home</li>
                 </a>
                 <a href="">
                     <li><i class="fa-solid fa-arrow-trend-up"></i> Top selling</li>
@@ -141,10 +142,10 @@ if(isset($_POST['register'])){
                 <a href="login.php">
                     <li><i class="fa-solid fa-user"></i> Login</li>
                 </a>
-                </ul>
+            </ul>
 
         </div>
-        </div>
+    </div>
 </body>
 <script src="loader.js"></script>
 

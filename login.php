@@ -4,29 +4,30 @@ include('connect.php');
 
 session_start();
 
-if(isset($_SESSION['user_id'])){
-   $user_id = $_SESSION['user_id'];
-}else{
-   $user_id = '';
-};
+if (isset($_SESSION['user_id'])) {
+    $user_id = $_SESSION['user_id'];
+} else {
+    $user_id = '';
+}
+;
 
-if(isset($_POST['login'])){
+if (isset($_POST['login'])) {
 
-   $email = $_POST['email'];
-   $email = filter_var($email, FILTER_SANITIZE_STRING);
-   $pass = sha1($_POST['pass']);
-   $pass = filter_var($pass, FILTER_SANITIZE_STRING);
+    $email = $_POST['email'];
+    $email = filter_var($email, FILTER_SANITIZE_STRING);
+    $pass = sha1($_POST['pass']);
+    $pass = filter_var($pass, FILTER_SANITIZE_STRING);
 
-   $select_user = $conn->prepare("SELECT * FROM `users` WHERE email = ? AND password = ?");
-   $select_user->execute([$email, $pass]);
-   $row = $select_user->fetch(PDO::FETCH_ASSOC);
+    $select_user = $conn->prepare("SELECT * FROM `users` WHERE email = ? AND password = ?");
+    $select_user->execute([$email, $pass]);
+    $row = $select_user->fetch(PDO::FETCH_ASSOC);
 
-   if($select_user->rowCount() > 0){
-      $_SESSION['user_id'] = $row['id'];
-      header('location:index.php');
-   }else{
-      $message[] = 'incorrect username or password!';
-   }
+    if ($select_user->rowCount() > 0) {
+        $_SESSION['user_id'] = $row['id'];
+        header('location:index.php');
+    } else {
+        $message[] = 'incorrect username or password!';
+    }
 
 }
 ?>
@@ -42,7 +43,7 @@ if(isset($_POST['login'])){
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
     <script src="https://kit.fontawesome.com/1ca3e04119.js" crossorigin="anonymous"></script>
-    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
 
 </head>
 
@@ -55,7 +56,7 @@ if(isset($_POST['login'])){
             </div>
             <div class="menu1">
                 <ul>
-                    <a href= "index.php">
+                    <a href="index.php">
                         <li>Home</li>
                     </a>
                     <a href="">
@@ -104,14 +105,14 @@ if(isset($_POST['login'])){
             <p>Don't have an account? <a href="register.php"> Register <i class="fa-solid fa-user-plus"></i></a></p>
         </div>
     </div>
-    <div class="mobile-menu login-menu" id="menus" >
+    <div class="mobile-menu login-menu" id="menus">
         <div class="cut-btn" onclick="menuclose()">
             <i class="fa-solid fa-xmark"></i>
         </div>
-        <div class="mobile-menus" >
+        <div class="mobile-menus">
             <ul>
                 <a href="index.php">
-                    <li><i class="fa-solid fa-house"></i>  Home</li>
+                    <li><i class="fa-solid fa-house"></i> Home</li>
                 </a>
                 <a href="">
                     <li><i class="fa-solid fa-arrow-trend-up"></i> Top selling</li>
@@ -128,10 +129,10 @@ if(isset($_POST['login'])){
                 <a href="register.php">
                     <li><i class="fa-solid fa-user-plus"></i> Register</li>
                 </a>
-                </ul>
+            </ul>
 
         </div>
-      </div>
+    </div>
     <script src="loader.js"></script>
 
 </body>
