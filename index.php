@@ -19,12 +19,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->execute([$email]);
 
             // Success message
-            echo "Thank you for signing up!";
+            $message[]= "Thank you for signing up!";
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
     } else {
-        echo "Please enter a valid email address.";
+        $message[]="Please enter a valid email address.";
     }
 }
 ?>
@@ -56,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <h1>SUPERNOVA</h1>
                 <h2>MRP:- <strike>3599</strike></h2>
                 <h2>SALE PRICE:- 2599 </h2>
-                <a href="#">Get the Deal</a>
+                <a href="http://localhost/ZASH-ecommerce-php/product-detail.php?pid=1">Get the Deal</a>
             </div>
             <div class="img-box">
                 <img src="img/banner-2.webp" alt="">
