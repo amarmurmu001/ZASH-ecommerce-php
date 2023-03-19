@@ -7,7 +7,8 @@ if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
 } else {
     $user_id = '';
-};
+}
+;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = trim($_POST["email"]);
@@ -86,35 +87,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <a href="">
                         <li><a href="#">
 
-                                <lord-icon src="https://cdn.lordicon.com/xfftupfv.json" trigger="hover" colors="primary:#ffffff" style="width:20px;height:20px">
+                                <lord-icon src="https://cdn.lordicon.com/xfftupfv.json" trigger="hover"
+                                    colors="primary:#ffffff" style="width:20px;height:20px">
                                 </lord-icon>
                             </a></li>
                     </a>
-                    <!-- <a href="">
-                        <li><a href="#">
-                                <lord-icon src="https://cdn.lordicon.com/hyhnpiza.json" trigger="hover"
-                                colors="primary:#ffffff" style="width:20px;height:20px">
-                                </lord-icon>
-                                
-                            </a></li>
-                            
-                    </a> -->
+
 
                     <a href="#">
                         <li>
                             <a href="login.php" id="profile">
-                                <lord-icon src="https://cdn.lordicon.com/bhfjfgqz.json" trigger="hover" colors="primary:#ffffff" style="width:20px;height:20px">
+                                <lord-icon src="https://cdn.lordicon.com/bhfjfgqz.json" trigger="hover"
+                                    colors="primary:#ffffff" style="width:20px;height:20px">
                                 </lord-icon>
 
                             </a>
                         </li>
+                    </a>
+                    <a href="">
+                        <li><a href="cart.php">
+                                <lord-icon src="https://cdn.lordicon.com/hyhnpiza.json" trigger="hover"
+                                    colors="primary:#ffffff" style="width:20px;height:20px">
+                                </lord-icon>
+
+                            </a></li>
+
                     </a>
                     <?php
                     $select_profile = $conn->prepare("SELECT * FROM `users` WHERE id = ?");
                     $select_profile->execute([$user_id]);
                     if ($select_profile->rowCount() > 0) {
                         $fetch_profile = $select_profile->fetch(PDO::FETCH_ASSOC);
-                    ?>
+                        ?>
                         <a href="">
                             <li>
                                 <?php echo $fetch_profile["name"]; ?>
@@ -123,11 +127,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <a href="logout.php">
                             <li>Logout</li>
                         </a>
-                    <?php
+                        <?php
                     } else {
-                    ?>
+                        ?>
                         <p></p>
-                    <?php
+                        <?php
                     }
                     ?>
 
@@ -177,7 +181,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
         <div class="banner">
             <div class="text-box">
-                <h1>SALES</h1>
+                <!-- <h1>SALES</h1>
                 <P>Introducing our new sales page, packed with the latest and greatest products at
                     unbeatable prices! From A to Z, we have every electronic devices you need,
                     all in one place. With our user-friendly website,
@@ -185,7 +189,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="button-box">
                     <a href="#" class="read-btn">READ MORE</a>
                     <a href="#" class="shop_btn">SHOP NOW</a>
-                </div>
+                </div> -->
             </div>
             <div class="img-box">
                 <img src="img/banner-img.png" alt="">
@@ -227,15 +231,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
         <div class="featured-product">
             <?php
-            $select_products = $conn->prepare("SELECT * FROM `products` LIMIT 6");
+            $select_products = $conn->prepare("SELECT * FROM `products` LIMIT 16");
             $select_products->execute();
             if ($select_products->rowCount() > 0) {
                 while ($fetch_product = $select_products->fetch(PDO::FETCH_ASSOC)) {
-            ?>
+                    ?>
                     <div class="product-card">
                         <img src="img/<?= $fetch_product['image_01']; ?>" alt="">
-                        <h2><?= $fetch_product['name']; ?></h2>
-                        <h1>RS <?= $fetch_product['price']; ?></h1>
+                        <h2>
+                            <?= $fetch_product['name']; ?>
+                        </h2>
+                        <h1>RS
+                            <?= $fetch_product['price']; ?>/-
+                        </h1>
                         <div class="rating">
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-solid fa-star"></i>
@@ -246,7 +254,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <a id="buy-btn" href="product-detail.php?pid=<?= $fetch_product['id']; ?>">Buy now</a>
 
                     </div>
-            <?php
+                    <?php
                 }
             } else {
                 echo '<p class="empty">no products added yet!</p>';
@@ -287,57 +295,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
             </div>
         </div>
-        <div class="footer">
-            <div class="footer-col">
-                <h2>About</h2>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Modi ipsa, nihil eligendi tenetur molestias dolor amet explicabo. Unde distinctio quis ipsam.</p>
-            </div>
-            <div class="footer-col">
-                <h2>Contact</h2>
-                <ul>
-                    <li><i class="fa-solid fa-location-dot"></i> Silli Polytechnic ,Silli,Ranchi ,835102</li>
-                    <li><i class="fa-solid fa-phone"></i> Mobile: 987654321</li>
-                    <li><i class="fa-solid fa-envelope"></i> Email:zash@mail</li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h2>Categories</h2>
-                <ul>
-                    <li><a href="">Headphones</a></li>
-                    <li><a href="">Smart Watches</a></li>
-                    <li><a href="">Bluetooth Speaker</a></li>
-                    <li><a href="">Wireless Earbud</a></li>
-                    <li><a href="">Home Theatre</a></li>
-                    <li><a href="">Projector</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h2>Pages</h2>
-                <ul>
-                    <li><a href="">Home</a></li>
-                    <li><a href="">About</a></li>
-                    <li><a href="">Privacy Policy</a></li>
-                    <li><a href="">Returns</a></li>
-                    <li><a href="">Terms & Condition</a></li>
-                    <li><a href="">Contact us</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="copy-right flex-copy">
-            <p>Date & time - </p>
-            <p id="datetime"></p>
-
-            <p>Made with <i class="fa-solid fa-heart"></i> by ZASH. </p>
-
-        </div>
+        <?php include('footer.php') ?>
 
         <script src="loader.js"></script>
         <script>
             /*----------page load popup---------*/
             const popup = document.querySelector('.popup');
             const close = document.querySelector('.close');
-            window.onload = function() {
-                setTimeout(function() {
+            window.onload = function () {
+                setTimeout(function () {
                     popup.style.display = "block"
                     //some time delay
 
@@ -349,13 +315,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             })
         </script>
         <!-- Date and Time -->
-        <script>
-            function displayDateTime() {
-                var date = new Date();
-                document.getElementById("datetime").innerHTML = date.toLocaleString();
-            }
-            setInterval(displayDateTime, 1000);
-        </script>
+
 
 </body>
 

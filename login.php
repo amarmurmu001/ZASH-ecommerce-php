@@ -48,6 +48,7 @@ if (isset($_POST['login'])) {
 </head>
 
 <body>
+
     <div id="preloader"></div>
     <div class="login-container">
         <div class="login-navbar">
@@ -77,7 +78,7 @@ if (isset($_POST['login'])) {
                             </a></li>
                     </a>
                     <a href="">
-                        <li><a href="#">
+                        <li><a href="cart.php">
                                 <lord-icon src="https://cdn.lordicon.com/hyhnpiza.json" trigger="hover"
                                     colors="primary:#ffffff" style="width:20px;height:20px">
                                 </lord-icon>
@@ -103,8 +104,12 @@ if (isset($_POST['login'])) {
                 <input type="submit" name="login" value="Submit">
             </form>
             <p>Don't have an account? <a href="register.php"> Register <i class="fa-solid fa-user-plus"></i></a></p>
+            <p>
+                <?php include('message.php'); ?>
+            </p>
         </div>
     </div>
+
     <div class="mobile-menu login-menu" id="menus">
         <div class="cut-btn" onclick="menuclose()">
             <i class="fa-solid fa-xmark"></i>

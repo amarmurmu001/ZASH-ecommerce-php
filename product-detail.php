@@ -1,17 +1,48 @@
 <?php
 
-include('connect.php');
+include 'connect.php';
+
 session_start();
 
-if (isset($_SESSION['user_id'])) {
-    $user_id = $_SESSION['user_id'];
-} else {
-    $user_id = '';
+if(isset($_SESSION['user_id'])){
+   $user_id = $_SESSION['user_id'];
+}else{
+   $user_id = '';
+   header('location:login.php');
+};
+
+if(isset($_POST['order'])){
+
+   $name = $_POST['name'];
+   $name = filter_var($name, FILTER_SANITIZE_STRING);
+   $number = $_POST['number'];
+   $number = filter_var($number, FILTER_SANITIZE_STRING);
+   $email = $_POST['email'];
+   $email = filter_var($email, FILTER_SANITIZE_STRING);
+   $method = $_POST['method'];
+   $method = filter_var($method, FILTER_SANITIZE_STRING);
+   $address = 'flat no. '. $_POST['flat'] .', '. $_POST['street'] .', '. $_POST['city'] .', '. $_POST['state'] .', '. $_POST['country'] .' - '. $_POST['pin_code'];
+   $address = filter_var($address, FILTER_SANITIZE_STRING);
+   $total_products = $_POST['total_products'];
+   $total_price = $_POST['total_price'];
+
+   $check_cart = $conn->prepare("SELECT * FROM `cart` WHERE user_id = ?");
+   $check_cart->execute([$user_id]);
+
+   if($check_cart->rowCount() > 0){
+
+      $insert_order = $conn->prepare("INSERT INTO `orders`(user_id, name, number, email, method, address, total_products, total_price) VALUES(?,?,?,?,?,?,?,?)");
+      $insert_order->execute([$user_id, $name, $number, $email, $method, $address, $total_products, $total_price]);
+
+      $delete_cart = $conn->prepare("DELETE FROM `cart` WHERE user_id = ?");
+      $delete_cart->execute([$user_id]);
+
+      $message[] = 'order placed successfully!';
+   }else{
+      $message[] = 'your cart is empty';
+   }
+
 }
-;
-
-$product_id = $_GET['pid'];
-
 
 ?>
 <!DOCTYPE html>
@@ -30,6 +61,9 @@ $product_id = $_GET['pid'];
 </head>
 
 <body>
+    <?php
+    include('message.php')
+    ?>
     <div class="detail-header">
         <div class="detail-nav">
             <div class="logo3">
@@ -54,13 +88,28 @@ $product_id = $_GET['pid'];
                         $fetch_profile = $select_profile->fetch(PDO::FETCH_ASSOC);
                         ?>
                         <a href="">
-                            <li>
+                        <li><a href="cart.php">
+                                <lord-icon src="https://cdn.lordicon.com/hyhnpiza.json" trigger="hover"
+                                colors="primary:#333" style="width:20px;height:20px">
+                                </lord-icon>
+                                
+                            </a></li>
+                            
+                    </a>
+                    <li>
+
+                        <a href="">
+                            
                                 <?php echo $fetch_profile["name"]; ?>
-                            </li>
+                            
                         </a>
+                    </li>
+                    <li>
+
                         <a href="logout.php">
-                            <li>Logout</li>
+                            Logout
                         </a>
+                    </li>
                         <?php
                     } else {
                         ?>
@@ -73,35 +122,56 @@ $product_id = $_GET['pid'];
 
 
         </div>
-        <?php
-        $stmt = $conn->prepare("SELECT * FROM products WHERE id = :product_id");
-        $stmt->bindParam(':product_id', $product_id);
-        $stmt->execute();
-        $product = $stmt->fetch(PDO::FETCH_ASSOC);
-        ?>
+    <?php
+     $pid = $_GET['pid'];
+     $select_products = $conn->prepare("SELECT * FROM `products` WHERE id = ?"); 
+     $select_products->execute([$pid]);
+     if($select_products->rowCount() > 0){
+      while($fetch_product = $select_products->fetch(PDO::FETCH_ASSOC)){
+   ?>
+   <form action="" method="post" class="box">
+      <input type="hidden" name="pid" value="<?= $fetch_product['id']; ?>">
+      <input type="hidden" name="name" value="<?= $fetch_product['name']; ?>">
+      <input type="hidden" name="price" value="<?= $fetch_product['price']; ?>">
+      <input type="hidden" name="image" value="<?= $fetch_product['image_01']; ?>">
         <div class="product-details">
             <div class="img-box-2">
-                <img src="img/<?= $product['image_01'] ?>" alt="">
+                <img src="img/<?= $fetch_product['image_01'] ?>" alt="">
             </div>
             <div class="action-box">
                 <h1>
-                    <?= $product['name'] ?>
+                    <?= $fetch_product['name'] ?>
                 </h1>
                 <h2>Rs
-                    <?= $product['price'] ?>
+                    <?= $fetch_product['price'] ?>/-
                 </h2>
                 <p>
-                    <?= $product['details'] ?>
+                    <?= $fetch_product['details'] ?>
                 </p>
+                <div class="action-section">
                 <div class="counter">
-                    <span class="minus">-</span>
-                    <span class="num"></span>
-                    <span class="plus">+</span>
+                <input type="number" name="qty" class="qty" min="1" max="99" 
+                onkeypress="if(this.value.length == 2) return false;" value="1">
+                </div>
+                <div class="buy-btn">
+                    <!-- <a href="address.php"><i class="fa-solid fa-bag-shopping"></i> Add to Cart</a> -->
+                    <input type="submit" value="add to cart" class="btn" name="add_to_cart">
+                </div>
                 </div>
             </div>
         </div>
+    </form>    
+        <?php
+      }
+   }else{
+      echo '<p class="empty">no products added yet!</p>';
+   }
+   ?>
 
     </div>
+
+    <?php include('footer.php')?>
+
 
     <script>
         const plus = document.querySelector(".plus"),

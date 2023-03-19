@@ -209,7 +209,8 @@ lord-icon {
   display: none;
 }
 .footer {
-  width: 80%;
+  padding-left: 10%;
+  width: 100%;
   margin: auto;
   display: flex;
   justify-content: space-between;
@@ -623,19 +624,183 @@ lord-icon {
   display: inline-block;
   width: 40px;
   height: 40px;
-  background-color: #000;
-  color: #fff;
+  border: 1px solid #333;
+  color: #333;
   text-align: center;
   cursor: pointer;
   padding: 10px 5px;
 }
 .num {
-  padding: 0 10px;
+  padding: 10px 10px;
+  border: 1px solid #333;
 }
 .counter {
   margin-top: 30px;
 }
+.detail-header {
+  margin-bottom: 50px;
+}
+.detail-hamburger {
+  display: none;
+}
+.footer {
+  border-top: 1px solid #777;
+  padding-top: 20px;
+}
+.action-section {
+  display: flex;
+}
+.action-section .buy-btn {
+  margin-top: 40px;
+  margin-left: 20px;
+}
+.action-section .buy-btn input {
+  text-decoration: none;
+  padding: 10px 30px;
+  color: #fff;
+  background-color: #4a00e0;
+  font-size: 14px;
+}
+.action-section .buy-btn input:hover {
+  background-color: #3800a9;
+  color: #fffcc;
+}
+/*------------------------------review---------------------------------------------*/
+.navigation-status {
+  display: flex;
+  text-align: center;
+  width: 10%;
+  margin: auto;
+}
+.navigation-status p {
+  border: 1px solid #333;
+  padding: 3px 7px;
+  border-radius: 50%;
+  font-size: 14px;
+}
+.navigation-status .p1:after {
+  position: absolute;
+  top: 58px;
+  right: 627px;
+  content: "";
+  height: 2px;
+  background-color: #242424;
+  width: 100px;
+  margin-left: 15px;
+}
+.p2 {
+  margin-left: 100px;
+}
+.review-section {
+  width: 90%;
+  margin: 20px auto;
+  height: 300px;
+}
+.extimated p {
+  color: #333;
+  border: 1px solid #333;
+  text-align: center;
+  padding: 5px 0px;
+}
+.product-review {
+  display: flex;
+  margin-top: 20px;
+  border: 1px solid #333;
+  padding: 10px 50px;
+}
+.product-review .img-box img {
+  width: 300px;
+}
+.info-box {
+  margin-left: 50px;
+  padding-top: 50px;
+}
+.product-review .img-box a {
+  position: relative;
+  bottom: 280px;
+  right: 30px;
+  text-decoration: none;
+  color: #333;
+}
+.address {
+  margin-top: 20px;
+  border: 1px solid #333;
+  padding: 20px 50px;
+  margin-bottom: 30px;
+}
+.address h1 {
+  font-size: 22px;
+  margin-bottom: 30px;
+}
+.address form label {
+  padding-bottom: 10px;
+}
+.address form input {
+  margin-bottom: 15px;
+  border: none;
+  outline: none;
+  margin-top: 0px;
+  margin-bottom: 30px;
+  height: 35px;
+  width: 300px;
+  padding: 5px;
+  border-bottom: 2px solid #333;
+  color: #333;
 
+  font-size: 18px;
+}
+
+.address form input:focus {
+  border-bottom: 2px solid #4a00e0;
+}
+
+.address form .state-drop {
+  margin-bottom: 15px;
+  border: none;
+  outline: none;
+  margin-top: 0px;
+  margin-bottom: 30px;
+  height: 35px;
+  width: 300px;
+  padding: 5px;
+  border-bottom: 2px solid #333;
+  color: #333;
+  font-size: 18px;
+}
+.address form select:focus {
+  border-bottom: 2px solid #4a00e0;
+}
+.save-btn {
+  margin-bottom: 15px;
+  margin-top: 0px;
+  margin-bottom: 30px;
+  height: 35px;
+  padding: 7px 15px;
+  color: #fff;
+  font-size: 15px;
+  background-color: #4a00e0;
+  border-radius: 4px;
+  text-decoration: none;
+}
+.price-review {
+  border: 1px solid #333;
+  padding: 30px 25px;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+.price-review h1 {
+  font-size: 25px;
+}
+.price-review a {
+  height: 35px;
+  padding: 8px 25px;
+  color: #fff;
+  font-size: 15px;
+  background-color: #4a00e0;
+  border-radius: 4px;
+  text-decoration: none;
+}
 /*-------------------------Mobile screen----------------------------------------*/
 
 @media only screen and (max-width: 600px) {
@@ -865,3 +1030,5 @@ lord-icon {
   position: fixed;
   z-index: 100;
 }
+
+/* ---------------------Cart------------------------- */

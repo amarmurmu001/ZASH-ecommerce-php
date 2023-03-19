@@ -35,7 +35,8 @@ if (isset($_POST['register'])) {
         } else {
             $insert_user = $conn->prepare("INSERT INTO `users`(name, email, password) VALUES(?,?,?)");
             $insert_user->execute([$name, $email, $cpass]);
-            echo 'registered successfully, login now please!';
+            $message[] = 'registered successfully, login now please!';
+
         }
     }
 
@@ -58,6 +59,8 @@ if (isset($_POST['register'])) {
 </head>
 
 <body>
+    <?php include('message.php'); ?>
+
     <div id="preloader"></div>
     <div class="login-container">
         <div class="login-navbar">
