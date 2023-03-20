@@ -118,7 +118,7 @@ if (isset($_POST['update_qty'])) {
                   <div class="product-card">
                      <form action="" method="post" class="box">
                         <input type="hidden" name="cart_id" value="<?= $fetch_cart['id']; ?>">
-                        <img src="img/<?= $fetch_cart['image']; ?>" alt="">
+                        <img src="<?= $fetch_cart['image']; ?>" alt="">
                         <h2>
                            <?= $fetch_cart['name']; ?>
                         </h2>
@@ -153,7 +153,7 @@ if (isset($_POST['update_qty'])) {
             <a href="index.php" class="option-btn">continue shopping</a>
             <a href="cart.php?delete_all" class="delete-btn <?= ($grand_total > 1) ? '' : 'disabled'; ?>"
                onclick="return confirm('delete all from cart?');">delete all item</a>
-            <a href="address.php" class="btn <?= ($grand_total > 1) ? '' : 'disabled'; ?>">proceed to checkout</a>
+            <a href="checkout.php" class="btn <?= ($grand_total > 1) ? '' : 'disabled'; ?>">proceed to checkout</a>
          </div>
 
          </section>

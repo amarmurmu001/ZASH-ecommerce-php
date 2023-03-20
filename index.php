@@ -237,7 +237,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 while ($fetch_product = $select_products->fetch(PDO::FETCH_ASSOC)) {
                     ?>
                     <div class="product-card">
-                        <img src="img/<?= $fetch_product['image_01']; ?>" alt="">
+                        <img src="<?= $fetch_product['image_01']; ?>" alt="">
                         <h2>
                             <?= $fetch_product['name']; ?>
                         </h2>

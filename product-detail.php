@@ -104,7 +104,7 @@ include 'dbcart.php';
       <input type="hidden" name="image" value="<?= $fetch_product['image_01']; ?>">
         <div class="product-details">
             <div class="img-box-2">
-                <img src="img/<?= $fetch_product['image_01'] ?>" alt="">
+                <img src="<?= $fetch_product['image_01'] ?>" alt="">
             </div>
             <div class="action-box">
                 <h1>

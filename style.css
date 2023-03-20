@@ -1023,6 +1023,16 @@ lord-icon {
     display: none;
   }
 }
+
+.razorpay-payment-button{
+  height: 35px;
+  padding: 8px 25px;
+  color: #fff;
+  font-size: 15px;
+  background-color: #4a00e0;
+  border-radius: 4px;
+  text-decoration: none;
+}
 #preloader {
   background: #fff url(img/loader.gif) no-repeat center center;
   height: 100vh;

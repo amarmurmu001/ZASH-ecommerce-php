@@ -14,29 +14,25 @@ if (isset($_SESSION['user_id'])) {
 
 if (isset($_POST['save'])) {
 
-    $name = $_POST['name'];
-    $name = filter_var($name, FILTER_SANITIZE_STRING);
-    $number = $_POST['number'];
-    $number = filter_var($number, FILTER_SANITIZE_STRING);
-    $address = 'flat no. ' . $_POST['flat'] . ', ' . $_POST['street'] . ', ' . $_POST['city'] . ', ' . $_POST['state'] . ' - ' . $_POST['pin_code'];
-    $address = filter_var($address, FILTER_SANITIZE_STRING);
-    $total_products = $_POST['total_products'];
-    $total_price = $_POST['total_price'];
+    $_SESSION['name'] = $_POST['name'];
+    $_SESSION['number'] = $_POST['number'];
+    $_SESSION['address'] =  $_POST['street'] . ', ' .$_POST['flat'] . ', ' . $_POST['city'] . ', ' . $_POST['state'] . ' - ' . $_POST['pin_code'];
+    $_SESSION['total_products'] = $_POST['total_products'];
+    $_SESSION['total_price'] = $_POST['total_price'];
+    $_SESSION['pid'] = $fetch_cart['pid'] ;
 
     $check_cart = $conn->prepare("SELECT * FROM `cart` WHERE user_id = ?");
     $check_cart->execute([$user_id]);
 
     if ($check_cart->rowCount() > 0) {
 
-        $insert_order = $conn->prepare("INSERT INTO `orders`(user_id, name, number, address, total_products, total_price) VALUES(?,?,?,?,?,?)");
-        $insert_order->execute([$user_id, $name, $number, $address, $total_products, $total_price]);
-
-        $delete_cart = $conn->prepare("DELETE FROM `cart` WHERE user_id = ?");
-        $delete_cart->execute([$user_id]);
-
         $message[] = 'Details saved successfully!';
     } else {
         $message[] = 'your cart is empty';
+    }
+    if($_POST['number']!='')
+    {
+        header("location:payment.php");
     }
 
 }
@@ -49,10 +45,12 @@ if (isset($_POST['save'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Address</title>
+    <title>Checkout</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/1ca3e04119.js" crossorigin="anonymous"></script>
     <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+
 </head>
 
 <body>
@@ -79,7 +77,7 @@ if (isset($_POST['save'])) {
                     ?>
                     <div class="img-box">
                         <a href="product-detail.php"><i class="fa-solid fa-chevron-left back"></i></a>
-                        <img src="img/<?= $fetch_cart['image']; ?>" alt="">
+                        <img src="<?= $fetch_cart['image']; ?>" alt="">
                     </div>
                     <div class="info-box">
                         <h1>
@@ -160,7 +158,7 @@ if (isset($_POST['save'])) {
                         <option value="Haryana">Haryana</option>
                         <option value="Himachal Pradesh">Himachal Pradesh</option>
                         <option value="Jammu and Kashmir">Jammu and Kashmir</option>
-                        <option value="Jharkhand" sele>Jharkhand</option>
+                        <option value="Jharkhand" selected>Jharkhand</option>
                         <option value="Karnataka">Karnataka</option>
                         <option value="Kerala">Kerala</option>
                         <option value="Madhya Pradesh">Madhya Pradesh</option>
