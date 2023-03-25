@@ -59,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <a href="http://localhost/ZASH-ecommerce-php/product-detail.php?pid=1">Get the Deal</a>
             </div>
             <div class="img-box">
-                <img src="img/banner-2.webp" alt="">
+                <img src="uploaded/banner-2.webp" alt="">
             </div>
         </div>
     </div>
@@ -181,15 +181,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
         <div class="banner">
             <div class="text-box">
-                <!-- <h1>SALES</h1>
-                <P>Introducing our new sales page, packed with the latest and greatest products at
-                    unbeatable prices! From A to Z, we have every electronic devices you need,
-                    all in one place. With our user-friendly website,
-                    you can easily browse and find the electronic products you want with just a few clicks.</P>
+                <h1>Zash</h1>
+                <p>Gadget Redefined</p>
                 <div class="button-box">
                     <a href="#" class="read-btn">READ MORE</a>
                     <a href="#" class="shop_btn">SHOP NOW</a>
-                </div> -->
+                </div> 
             </div>
             <div class="img-box">
                 <img src="img/banner-img.png" alt="">
@@ -231,7 +228,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
         <div class="featured-product">
             <?php
-            $select_products = $conn->prepare("SELECT * FROM `products` LIMIT 16");
+            $select_products = $conn->prepare("SELECT * FROM `products` LIMIT 8");
             $select_products->execute();
             if ($select_products->rowCount() > 0) {
                 while ($fetch_product = $select_products->fetch(PDO::FETCH_ASSOC)) {

@@ -15,6 +15,7 @@ if (isset($_SESSION['user_id'])) {
 if (isset($_POST['save'])) {
 
     $_SESSION['name'] = $_POST['name'];
+    $_SESSION['email'] = $_POST['email'];
     $_SESSION['number'] = $_POST['number'];
     $_SESSION['address'] =  $_POST['street'] . ', ' .$_POST['flat'] . ', ' . $_POST['city'] . ', ' . $_POST['state'] . ' - ' . $_POST['pin_code'];
     $_SESSION['total_products'] = $_POST['total_products'];
@@ -76,7 +77,7 @@ if (isset($_POST['save'])) {
                     $grand_total += ($fetch_cart['price'] * $fetch_cart['quantity']);
                     ?>
                     <div class="img-box">
-                        <a href="product-detail.php"><i class="fa-solid fa-chevron-left back"></i></a>
+                        <a href="cart.php"><i class="fa-solid fa-chevron-left back"></i></a>
                         <img src="<?= $fetch_cart['image']; ?>" alt="">
                     </div>
                     <div class="info-box">
@@ -109,6 +110,11 @@ if (isset($_POST['save'])) {
                 <label for="Name">Name
                     <br>
                     <input type="text" name="name" maxlength="20" required>
+                    <br>
+                </label>
+                <label for="email">Email
+                    <br>
+                    <input type="email" name="email" maxlength="20" required>
                     <br>
                 </label>
                 <label for="tel">Phone

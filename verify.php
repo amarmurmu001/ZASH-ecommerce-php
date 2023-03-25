@@ -2,6 +2,8 @@
 
 include 'connect.php';
 include('razorpay-php/Razorpay.php');
+use Razorpay\Api\Api;
+use Razorpay\Api\Errors\SignatureVerificationError;
 
 session_start();
 
@@ -21,7 +23,7 @@ if (isset($_SESSION['user_id'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment</title>
+    <title>Payment Verification</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/1ca3e04119.js" crossorigin="anonymous"></script>
     <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
@@ -44,81 +46,79 @@ if (isset($_SESSION['user_id'])) {
         </div>
         <div class="product-review">
             <?php
+$select_cart = $conn->prepare("SELECT * FROM `cart` WHERE user_id = ?");
+$select_cart->execute([$user_id]);
+$fetch_cart = $select_cart->fetch(PDO::FETCH_ASSOC);
 
-            include('gateway_config.php');
-            use Razorpay\Api\Api;
 
-            $api = new Api($keyID, $KeySecret);
-            $name = $_SESSION['name'];
-            $email = $_SESSION['email'];
-            $number = $_SESSION['number'];
-            $address = $_SESSION['address'];
-            $tproduct = $_SESSION['total_products'];
-            $tprice = $_SESSION['total_price'];
 
-            $select_cart = $conn->prepare("SELECT * FROM `cart` WHERE user_id = ?");
-            $select_cart->execute([$user_id]);
-            $fetch_cart = $select_cart->fetch(PDO::FETCH_ASSOC);
-            $title=$fetch_cart['name'];
-            $webtitle = 'Zash Pay';
-            $displayCurrency = 'INR';
-            $imageurl = 'img/favicon.ico';
+$success = true;
+include('gateway_config.php');
 
-            $orderData = [
-                'receipt' => 3456,
-                'amount' => $tprice * 100,
-                // 2000 rupees in paise
-                'currency' => 'INR',
-                'payment_capture' => 1 // auto capture
-            ];
+$error = "Payment Failed";
 
-            $razorpayOrder = $api->order->create($orderData);
-
-            $razorpayOrderId = $razorpayOrder['id'];
-
-            $_SESSION['razorpay_order_id'] = $razorpayOrderId;
-
-            $displayAmount = $amount = $orderData['amount'];
-
-            if ($displayCurrency !== 'INR')
+if (empty($_POST['razorpay_payment_id']) === false)
 {
-    $url = "https://api.fixer.io/latest?symbols=$displayCurrency&base=INR";
-    $exchange = json_decode(file_get_contents($url), true);
+    $api = new Api($keyId, $keySecret);
 
-    $displayAmount = $exchange['rates'][$displayCurrency] * $amount / 100;
+    try
+    {
+        // Please note that the razorpay order ID must
+        // come from a trusted source (session here, but
+        // could be database or something else)
+        $attributes = array(
+            'razorpay_order_id' => $_SESSION['razorpay_order_id'],
+            'razorpay_payment_id' => $_POST['razorpay_payment_id'],
+            'razorpay_signature' => $_POST['razorpay_signature']
+        );
+
+        $api->utility->verifyPaymentSignature($attributes);
+    }
+    catch(SignatureVerificationError $e)
+    {
+        $success = false;
+        $error = 'Razorpay Error : ' . $e->getMessage();
+    }
 }
 
-$data = [
-    "key"               => $keyID,
-    "amount"            => $amount,
-    "name"              => $webtitle,
-    "description"       => $title,
-    "image"             => $imageurl,
-    "prefill"           => [
-    "name"              => $name,
-    "email"             => $email,
-    "contact"           => $number,
-    ],
-    "notes"             => [
-    "address"           => $address,
-    "merchant_order_id" => "12312321",
-    ],
-    "theme"             => [
-    "color"             => "#F37254"
-    ],
-    "order_id"          => $razorpayOrderId,
-];
-
-if ($displayCurrency !== 'INR')
+if ($success === true)
 {
-    $data['display_currency']  = $displayCurrency;
-    $data['display_amount']    = $displayAmount;
+  $name = $_SESSION['name'];
+  $email = $_SESSION['email'];
+  $number = $_SESSION['number'];
+  $address = $_SESSION['address'];
+  $tproduct = $_SESSION['total_products'];
+  $tprice = $_SESSION['total_price'];
+
+  $posted_has = $_SESSION['razorpay_order_id'];
+
+  if(isset($_POST['razorpay_payment_id']))
+  {
+    $txnid = $_POST['razorpay_payment_id'];
+    $status = 'success';
+    $eid =['shopping_order_id'];
+    $subject = 'Your payment has been successful..';
+    // $key_value = 'okpmt';
+
+    $currency = 'INR';
+    $date= new DateTime(null,new DateTimeZone("Asia/Kolkata"));
+    $paymen_date = $date->format('Y-m-d H:i:s');
+
+    $sql ="SELECT count(*) FROM `orders` WHERE txnid = :txnid";
+    $stmt=$conn->prepare($sql);
+    $stmt->bindParam(':txnid',$txnid, PDO::PARAM_STR);  
+    $stmt->execute();
+    $countts=$stmt->fetchColumn();
+  
+  }
 }
-
-$json = json_encode($data);
-
+else
+{
+    $html = "<p>Your payment failed</p>
+             <p>{$error}</p>";
+}
             ?>
-             <?php
+            <?php
             $grand_total = 0;
             $cart_items[] = '';
             $select_cart = $conn->prepare("SELECT * FROM `cart` WHERE user_id = ?");
@@ -152,8 +152,6 @@ $json = json_encode($data);
                 echo '<p class="empty">your cart is empty!</p>';
             }
             ?>
-
-
         </div>
         <div class="address">
             <h1><i class="fa-solid fa-location-dot"></i> Delivery Address</h1>
