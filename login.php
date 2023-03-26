@@ -101,7 +101,7 @@ if (isset($_POST['login'])) {
             <form action="" method="post">
                 <input type="text" name="email" placeholder="Email">
                 <input type="text" name="pass" placeholder="Password" class="sec">
-                <input type="submit" name="login" value="Submit">
+                <input type="submit" name="login" value="Log in">
             </form>
             <p>Don't have an account? <a href="register.php"> Register <i class="fa-solid fa-user-plus"></i></a></p>
             <p>

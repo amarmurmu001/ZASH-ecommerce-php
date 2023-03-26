@@ -1088,3 +1088,29 @@ lord-icon {
 }
 
 /* ---------------------Cart------------------------- */
+
+/*-----------------------cssfix---------------------*/
+.buy-btn input{
+  border: none;
+  outline: none;
+  padding: 9px 10px;
+  background-color: #4a00e0;
+  color: #fff;
+  border-radius: 7px;
+  font-weight: 100;
+  margin-top: 3px;
+}
+.product-inside{
+  display: flex;
+}
+.product-inside .img-box img{
+  width: 200px;
+}
+.product-inside .info-box h1{
+  font-size: 22px;
+}
+.payment-review{
+  border: 1px dashed #333;
+  margin-top: 50px;
+  padding: 10px;
+}

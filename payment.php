@@ -130,8 +130,8 @@ $json = json_encode($data);
                     $total_products = implode($cart_items);
                     $grand_total += ($fetch_cart['price'] * $fetch_cart['quantity']);
                     ?>
+                      <div class="product-inside">
                     <div class="img-box">
-                        <a href="cart.php"><i class="fa-solid fa-chevron-left back"></i></a>
                         <img src="<?= $fetch_cart['image']; ?>" alt="">
                     </div>
                     <div class="info-box">
@@ -147,6 +147,7 @@ $json = json_encode($data);
                             <?= $fetch_cart['quantity']; ?>
                         </p>
                     </div>
+                </div>
                     <?php
                 }
             } else {

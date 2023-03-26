@@ -43,7 +43,7 @@ if (isset($_SESSION['user_id'])) {
         <div class="extimated">
             <p><i class="fa-solid fa-truck"></i> Estimated Delivery by Friday, 31st March</p>
         </div>
-        <div class="product-review">
+        <div class="payment-review">
 
             <?php
             $success = true;
