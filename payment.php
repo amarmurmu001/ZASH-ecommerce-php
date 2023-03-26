@@ -180,7 +180,7 @@ $json = json_encode($data);
     data-prefill.name="<?php echo $data['prefill']['name']?>"
     data-prefill.email="<?php echo $data['prefill']['email']?>"
     data-prefill.contact="<?php echo $data['prefill']['contact']?>"
-    data-notes.shopping_order_id="3456"
+    data-notes.shopping_order_id="<?php echo $pid;?>"
     data-order_id="<?php echo $data['order_id']?>"
     <?php if ($displayCurrency !== 'INR') { ?> data-display_amount="<?php echo $data['display_amount']?>" <?php } ?>
     <?php if ($displayCurrency !== 'INR') { ?> data-display_currency="<?php echo $data['display_currency']?>" <?php } ?>
