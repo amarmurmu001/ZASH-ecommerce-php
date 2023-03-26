@@ -65,6 +65,7 @@ if (isset($_POST['save'])) {
 
     <div class="review-section">
         <div class="product-review">
+            <div class="product-1">
             <?php
             $grand_total = 0;
             $cart_items[] = '';
@@ -100,8 +101,9 @@ if (isset($_POST['save'])) {
             }
             ?>
 
-
+            </div>
         </div>
+        <div class="address-container">
         <div class="address">
             <form action="" method='POST'>
                 <input type="hidden" name="total_products" value="<?= $total_products; ?>">
@@ -187,9 +189,10 @@ if (isset($_POST['save'])) {
                     <br>
                 </label>
                 <br>
-                <button type="submit" name="save" class="save-btn <?= ($grand_total > 1) ? '' : 'disabled'; ?>">Save Address
+                <button type="submit" name="save" class="save-btn" <?= ($grand_total > 1) ? '' : 'disabled'; ?>">Save Address
                     and Continue</button>
             </form>
+        </div>
         </div>
     </div>
 </body>

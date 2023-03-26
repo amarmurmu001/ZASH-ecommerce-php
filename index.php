@@ -181,8 +181,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
         <div class="banner">
             <div class="text-box">
-                <h1>Zash</h1>
-                <p>Gadget Redefined</p>
+                <h1>One stop destination for all <br> your gadget needs </h1>
+                <p>Handpicked collection for you</p>
                 <div class="button-box">
                     <a href="#" class="read-btn">READ MORE</a>
                     <a href="#" class="shop_btn">SHOP NOW</a>

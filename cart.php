@@ -133,7 +133,7 @@ if (isset($_POST['update_qty'])) {
                         <div class="sub-total"> Sub total : <span>Rs
                               <?= $sub_total = ($fetch_cart['price'] * $fetch_cart['quantity']); ?>/-
                            </span> </div>
-                        <input type="submit" value="DELETE ITEM" onclick="return confirm('delete this from cart?');"
+                        <input type="submit" value="DELETE ITEM " onclick="return confirm('delete this from cart?');"
                            class="delete-btn" name="delete">
                      </form>
                   </div>
@@ -150,10 +150,10 @@ if (isset($_POST['update_qty'])) {
             <p>Grand total : <span>Rs
                   <?= $grand_total; ?>/-
                </span></p>
-            <a href="index.php" class="option-btn">continue shopping</a>
+            <a href="index.php" class="option-btn">continue shopping <i class="fa-solid fa-reply"></i></a>
             <a href="cart.php?delete_all" class="delete-btn <?= ($grand_total > 1) ? '' : 'disabled'; ?>"
-               onclick="return confirm('delete all from cart?');">delete all item</a>
-            <a href="checkout.php" class="btn <?= ($grand_total > 1) ? '' : 'disabled'; ?>">proceed to checkout</a>
+               onclick="return confirm('delete all from cart?');">delete all item <i class="fa-solid fa-trash"></i></a>
+            <a href="checkout.php" class="btn <?= ($grand_total > 1) ? '' : 'disabled'; ?>">proceed to checkout <i class="fa-solid fa-arrow-right"></i></a>
          </div>
 
          </section>

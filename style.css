@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;1,100;1,300;1,400&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap');
 
 * {
   padding: 0;
@@ -58,6 +59,7 @@ lord-icon {
 
 .banner .text-box {
   margin-top: 80px;
+  text-align: left;
 }
 
 .banner .img-box img {
@@ -66,21 +68,21 @@ lord-icon {
 }
 
 .banner .text-box h1 {
-  font-size: 40px;
+  font-size: 45px;
   color: #fff;
 }
 
 .banner .text-box p {
-  font-size: 14px;
+  font-size: 18px;
   color: #fff;
-  font-weight: 300
+  font-weight: 300;
   line-height: 17px;
   margin-top: 20px;
   width: 600px;
 }
 
 .button-box {
-  text-align: center;
+  text-align: left;
   margin-top: 30px;
 }
 
@@ -419,15 +421,15 @@ lord-icon {
   margin-top: 20px;
   padding: 5px 15px;
   color: #fff;
-  background-color: #fb641b;
+  background-color: #4a00e0;
   border-radius: 20px;
   font-size: 14px;
   margin-right: 15px;
 }
 .product-card a:hover {
-  color: #fb641b;
+  color: #4a00e0;
   background-color: #fff;
-  border: 1px solid #fb641b;
+  border: 1px solid #4a00e0;
   padding: 3px 13px;
 }
 .product-card .add {
@@ -651,16 +653,63 @@ lord-icon {
   margin-top: 40px;
   margin-left: 20px;
 }
-.action-section .buy-btn input {
+.action-section .buy-btn input  .delete-btn{
   text-decoration: none;
   padding: 10px 30px;
   color: #fff;
   background-color: #4a00e0;
+  border: none;
+  outline: none;
   font-size: 14px;
+  border-radius: 7px;
 }
 .action-section .buy-btn input:hover {
   background-color: #3800a9;
-  color: #fffcc;
+  color: #fffccc;
+}
+.qty{
+  border: none;
+  outline: none;
+  border: 1px solid #4a00e0;
+  padding: 8px 5px;
+  margin-top: 12px;
+  border-radius: 7px;
+  font-size: 14px;
+}
+.delete-btn  , .cart-total a ,.save-btn{
+  border: none;
+  outline: none;
+  background-color: #4a00e0;
+  padding: 7px 10px;
+  color: #fff;
+  margin-top: 5px;
+  border-radius: 7px;
+}
+.cart-total{
+  width: 90%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+}
+.cart-total a{
+  text-decoration: none;
+  margin-bottom: 50px;
+}
+.cart-total p{
+  font-weight: bold;
+  margin-top: 10px;
+}
+.review-section{
+  margin-bottom: 100px;
+}
+.review-wrap{
+  display: flex;
+  flex-direction: column;
+}
+.product-review{
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 500px;
 }
 /*------------------------------review---------------------------------------------*/
 .navigation-status {

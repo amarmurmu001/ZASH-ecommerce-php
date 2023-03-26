@@ -118,8 +118,8 @@ include 'dbcart.php';
                 </p>
                 <div class="action-section">
                 <div class="counter">
-                <input type="number" name="qty" class="qty" min="1" max="99" 
-                onkeypress="if(this.value.length == 2) return false;" value="1">
+                <input type="number" placeholder="qty" name="qty" class="qty" min="1" max="99" 
+                onkeypress="if(this.value.length == 2) return false;" value="1" >
                 </div>
                 <div class="buy-btn">
                     <!-- <a href="address.php"><i class="fa-solid fa-bag-shopping"></i> Add to Cart</a> -->
