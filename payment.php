@@ -55,6 +55,7 @@ if (isset($_SESSION['user_id'])) {
             $address = $_SESSION['address'];
             $tproduct = $_SESSION['total_products'];
             $tprice = $_SESSION['total_price'];
+            $pid = $_SESSION['pid'];
 
             $select_cart = $conn->prepare("SELECT * FROM `cart` WHERE user_id = ?");
             $select_cart->execute([$user_id]);
