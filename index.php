@@ -185,7 +185,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <p>Handpicked collection for you</p>
                 <div class="button-box">
                     <a href="#" class="read-btn">READ MORE</a>
-                    <a href="#" class="shop_btn">SHOP NOW</a>
+                    <a href="#featured" class="shop_btn">SHOP NOW</a>
                 </div> 
             </div>
             <div class="img-box">
@@ -222,7 +222,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 
     <div class="featured-product-container">
-        <div class="featured-head">
+        <div class="featured-head" id="featured">
             <h1>Featured Product</h1>
             <div class="dash"></div>
         </div>
@@ -304,7 +304,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     popup.style.display = "block"
                     //some time delay
 
-                }, 1000)
+                }, 3000)
             }
 
             close.addEventListener('click', () => {
