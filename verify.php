@@ -43,7 +43,7 @@ if (isset($_SESSION['user_id'])) {
         <div class="extimated">
             <p><i class="fa-solid fa-truck"></i> Estimated Delivery by Friday, 31st March</p>
         </div>
-        <div class="payment-review">
+        <div id="tabledata" class="payment-review">
 
             <?php
             $success = true;
@@ -123,7 +123,7 @@ if (isset($_SESSION['user_id'])) {
 
                         }
                         echo '<h2 style="color:#33ff00";>' . $subject . '</h2>  <hr>';
-                        echo '<table class="table">';
+                        echo '<table  class="table">';
                         echo '<tr>';
 
                         $rows = $sql = "SELECT * FROM `orders` WHERE txnid=:txnid";
@@ -178,6 +178,7 @@ if (isset($_SESSION['user_id'])) {
             ?>
 
         </div>
+        <button id="btn-one" class="delete-btn" >Print</button>
         <!-- <?php
         $grand_total = 0;
         $cart_items[] = '';
@@ -212,6 +213,25 @@ if (isset($_SESSION['user_id'])) {
             echo '<p class="empty">your cart is empty!</p>';
         }
         ?> -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
+
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
+    integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+></script>
+        <script>
+          document.querySelector('#btn-one').addEventListener('click', function () {
+		html2canvas(document.querySelector('#tabledata')).then((canvas) => {
+			let base64image = canvas.toDataURL('image/png');
+			let pdf = new jsPDF('p', 'px', [1600, 1131]);
+			pdf.addImage(base64image, 'PNG', 15, 15, 1229.4, 225);
+			pdf.save('zash<?=$txnid?>.pdf');
+		});
+	});
+            
+        </script>
 
 
 </body>
