@@ -122,8 +122,8 @@ if (isset($_SESSION['user_id'])) {
                             $delete_cart->execute([$user_id]);
 
                         }
-                        echo '<h2 style="color:#33ff00";>' . $subject . '</h2>  <hr>';
-                        echo '<table  class="table">';
+                        echo '<h2 style="color:#4a00e0; margin-bottom:20px; margin-top:20px";>' . $subject . '</h2>  <hr>';
+                        echo '<table style="margin-top:20px";  class="table">';
                         echo '<tr>';
 
                         $rows = $sql = "SELECT * FROM `orders` WHERE txnid=:txnid";

@@ -75,14 +75,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <a href="">
                         <li>Home</li>
                     </a>
-                    <a href="">
-                        <li>Top selling</li>
-                    </a>
-                    <a href="">
+                    <a href="#category">
                         <li>Categories</li>
                     </a>
-                    <a href="">
-                        <li>Offer</li>
+                    <a href="#featured">
+                        <li>Top selling</li>
+                    </a>
+                    <a href="#contact">
+                        <li>Contact</li>
                     </a>
                     <a href="">
                         <li><a href="#">
@@ -194,7 +194,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </header>
 
-    <div class="category">
+    <div class="category" id="category">
         <div class="category-col">
             <a href="">
                 <img src="img/cat 1.jpg" alt="">
@@ -276,7 +276,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         </div>
 
-        <div class="news-letter">
+        <div class="news-letter" id="contact">
             <div class="news-letter-content">
                 <p>NEWSLETTER</p>
                 <H1>SIGN UP FOR LATEST UPDATE AND OFFER</H1>

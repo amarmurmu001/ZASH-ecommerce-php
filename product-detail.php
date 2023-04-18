@@ -110,6 +110,7 @@ include 'dbcart.php';
                 <h1>
                     <?= $fetch_product['name'] ?>
                 </h1>
+                <p class="stock"><i class="fa-solid fa-clock"></i> Hurry up only 10 left</p>
                 <h2>Rs
                     <?= $fetch_product['price'] ?>/-
                 </h2>
